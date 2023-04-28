@@ -16,6 +16,9 @@ const approveAndSwap = require("./abis/ApproveAndSwap.json")
 const factory = require("./abis/FunWalletFactory.json")
 const paymasterdata = require("./abis/TokenPaymaster.json")
 const priceOracle = require("./abis/TokenPriceOracle.json")
+const approveAndExec = require("./abis/ApproveAndExec.json")
+const gaslessPaymaster = require("./abis/GaslessPaymaster.json")
+const feePercentOracle = require("./abis/FeePercentOracle.json")
 
 const ROUTER_ADDR = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
 const WETH_MAINNET = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
@@ -63,6 +66,18 @@ const loadNetwork = async (wallet) => {
 
     const tokenPriceOracleAddress = await deployPriceOracle(wallet)
     console.log(`const tokenPriceOracleAddress = "${tokenPriceOracleAddress}"`)
+    await timeout(1000)
+
+    const approveAndExecAddress = await deployApproveAndExec(wallet)
+    console.log(`const approveAndExecAddress = "${approveAndExecAddress}"`)
+    await timeout(1000)
+
+    const gaslessPaymasterAddress = await deployGaslessPaymaster(wallet, entryPointAddress)
+    console.log(`const gaslessPaymasterAddress = "${gaslessPaymasterAddress}"`)
+    await timeout(1000)
+
+    const feePercentOracleAddress = await deployfeePercentOracle(wallet)
+    console.log(`const feePercentOracleAddress = "${feePercentOracleAddress}"`)
     await timeout(1000)
 
     const eoaAaveWithdrawAddress = await deployAaveWithdraw(wallet)
@@ -135,8 +150,21 @@ const deployFactory = (signer) => {
 const deployPaymaster = (signer, params) => {
     return deploy(signer, paymasterdata, params)
 }
+
 const deployPriceOracle = (signer) => {
     return deploy(signer, priceOracle)
+}
+
+const deployApproveAndExec = (signer) => {
+    return deploy(signer, approveAndExec)
+}
+
+const deployGaslessPaymaster = (signer, params) => {
+    return deploy(signer, gaslessPaymaster, [params])
+}
+
+const deployfeePercentOracle = (signer) => {
+    return deploy(signer, feePercentOracle)
 }
 
 // -da
@@ -251,9 +279,12 @@ const loadAbis = () => {
     const factoryPath = "deployer/FunWalletFactory.sol/FunWalletFactory.json"
     const walletPath = "FunWallet.sol/FunWallet.json"
     const tokenPaymasterpath = "paymaster/TokenPaymaster.sol/TokenPaymaster.json"
-    const tokenOracle = "paymaster/TokenPriceOracle.sol/TokenPriceOracle.json"
+    const gaslessPaymasterpath = "paymaster/GaslessPaymaster.sol/GaslessPaymaster.json"
+    const tokenOracle = "oracles/TokenPriceOracle.sol/TokenPriceOracle.json"
+    const feePercentOracle = "oracles/FeePercentOracle.sol/FeePercentOracle.json"
     const module = "modules/Module.sol/Module.json"
-    const abis = [entryPointPath, authContractPath, approveAndSwapPath, factoryPath, walletPath, tokenPaymasterpath, tokenOracle, aaveWithdrawPath, module]
+    const approveAndExec = "modules/actions/ApproveAndExec.sol/ApproveAndExec.json"
+    const abis = [entryPointPath, authContractPath, approveAndSwapPath, factoryPath, walletPath, tokenPaymasterpath, gaslessPaymasterpath, tokenOracle, aaveWithdrawPath, feePercentOracle, module, approveAndExec]
 
     abis.forEach(moveFile)
 }

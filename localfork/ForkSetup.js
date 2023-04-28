@@ -96,6 +96,9 @@ const loadNetwork = async (wallet) => {
         quoterContractAddress,
         uniswapV3RouterAddress,
         tokenPriceOracleAddress,
+        approveAndExecAddress,
+        gaslessPaymasterAddress,
+        feePercentOracleAddress,
         eoaAaveWithdrawAddress
     }
     fs.writeFileSync(forkConfigPath, JSON.stringify(config))

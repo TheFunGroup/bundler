@@ -174,7 +174,8 @@ export class BundlerServer {
       if (chain === HARDHAT_FORK_CHAIN_ID_STRING || chain == HARDHAT_FORK_CHAIN_KEY) {
         res.send({
           currency: 'ETH',
-          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
+          // rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
+          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com' },
           chain: 31337,
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,

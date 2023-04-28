@@ -179,6 +179,7 @@ export class BundlerServer {
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,
             factoryAddress: forkConfig.factoryAddress,
+            feeOracle: forkConfig.feePercentOracleAddress,
             verificationAddress: forkConfig.verificationAddress
           },
           moduleAddresses: {
@@ -186,10 +187,13 @@ export class BundlerServer {
               eoaAaveWithdrawAddress: forkConfig.eoaAaveWithdrawAddress,
             },
             paymaster: {
-              paymasterAddress: forkConfig.paymasterAddress,
+              gaslessSponsorAddress: forkConfig.gaslessPaymasterAddress,
+              tokenSponsorAddress: forkConfig.paymasterAddress,
               oracle: forkConfig.tokenPriceOracleAddress
             },
             tokenSwap: {
+              "1inchOracleAddress": "0x07D91f5fb9Bf7798734C3f606dB065549F6893bb",
+              approveAndExecAddress: forkConfig.approveAndExecAddress,
               univ3factory: forkConfig.poolFactoryAddress,
               univ3quoter: forkConfig.quoterContractAddress,
               univ3router: forkConfig.uniswapV3RouterAddress,

@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "^v16.0.0"
+  },
   "name": "localfork",
   "version": "1.0.0",
   "description": "",

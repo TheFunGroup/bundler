@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "^v16.0.0"
+  },
   "private": true,
   "name": "aa-bundler",
   "version": "0.2.0",

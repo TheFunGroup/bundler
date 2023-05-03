@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: "https://eth-mainnet.g.alchemy.com/v2/lcA7Kyqv42J1Qh-wLm__DdqSCJBtZyd1",
+        url: "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776",
       }
     }
   }

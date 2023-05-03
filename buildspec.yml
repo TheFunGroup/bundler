@@ -5,13 +5,14 @@ phases:
     runtime-versions:
       nodejs: 16
     commands:
-      - npm install -g yarn
+      - npm install
   pre_build:
     commands:
       - yarn && yarn preprocess
   build:
     commands:
       - cd localfork
+      - yarn install
       - node ForkSetup.js -l
       - node ForkSetup.js -d
       - node ForkSetup.js -dp

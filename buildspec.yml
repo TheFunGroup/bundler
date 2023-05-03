@@ -21,4 +21,13 @@ phases:
       - cd ..
 artifacts:
   files:
-    - '**/*'
+    - 'node_modules/**/*'
+    - 'package-lock.json'
+    - 'tsconfig.packages.json'
+    - 'yarn.lock'
+    - 'package.json'
+    - 'localfork/abis/**/*'
+    - 'localfork/node_modules/**/*'
+    - 'localfork/forkConfig.json'
+    - 'localfork/package.json'
+    - 'localfork/yarn.lock'

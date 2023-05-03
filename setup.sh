@@ -1,5 +1,7 @@
 #!/bin/bash
 ./.platform/hooks/prebuild/yarn.sh
+rm -rf node_modules yarn.lock
+yarn install
 yarn && yarn preprocess
 
 cd localfork && ./setup.sh

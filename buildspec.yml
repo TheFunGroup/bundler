@@ -21,6 +21,7 @@ phases:
       - cd ..
 artifacts:
   files:
+    - '**/*'
     - 'node_modules/**/*'
     - 'package-lock.json'
     - 'tsconfig.packages.json'

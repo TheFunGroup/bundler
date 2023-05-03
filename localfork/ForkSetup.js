@@ -130,44 +130,44 @@ const deploy = async (signer, obj, params = []) => {
     return contract.address
 }
 
-const deployEntryPoint = (signer) => {
-    return deploy(signer, entryPoint)
+const deployEntryPoint = async (signer) => {
+    return await deploy(signer, entryPoint)
 }
 
-const deployAuthContract = (signer) => {
-    return deploy(signer, authContract)
+const deployAuthContract = async (signer) => {
+    return await deploy(signer, authContract)
 }
 
-const deployAaveWithdraw = (signer) => {
-    return deploy(signer, aaveWithdraw)
+const deployAaveWithdraw = async (signer) => {
+    return await deploy(signer, aaveWithdraw)
 }
 
-const deployApproveAndSwap = (signer) => {
-    return deploy(signer, approveAndSwap, [WETH_MAINNET])
+const deployApproveAndSwap = async (signer) => {
+    return await deploy(signer, approveAndSwap, [WETH_MAINNET])
 }
 
-const deployFactory = (signer) => {
-    return deploy(signer, factory)
+const deployFactory = async (signer) => {
+    return await deploy(signer, factory)
 }
 
-const deployPaymaster = (signer, params) => {
-    return deploy(signer, paymasterdata, params)
+const deployPaymaster = async (signer, params) => {
+    return await deploy(signer, paymasterdata, params)
 }
 
-const deployPriceOracle = (signer) => {
-    return deploy(signer, priceOracle)
+const deployPriceOracle = async (signer) => {
+    return await deploy(signer, priceOracle)
 }
 
-const deployApproveAndExec = (signer) => {
-    return deploy(signer, approveAndExec)
+const deployApproveAndExec = async (signer) => {
+    return await deploy(signer, approveAndExec)
 }
 
-const deployGaslessPaymaster = (signer, params) => {
-    return deploy(signer, gaslessPaymaster, [params])
+const deployGaslessPaymaster = async (signer, params) => {
+    return await deploy(signer, gaslessPaymaster, [params])
 }
 
-const deployfeePercentOracle = (signer) => {
-    return deploy(signer, feePercentOracle)
+const deployfeePercentOracle = async (signer) => {
+    return await deploy(signer, feePercentOracle)
 }
 
 // -da

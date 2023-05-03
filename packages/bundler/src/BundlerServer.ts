@@ -158,7 +158,7 @@ export class BundlerServer {
         }
       }
       else {
-        throw "Only Hardhat Chain 36864 is supported"
+        throw "Only Hardhat Chain 36865 is supported"
       }
     } catch (err: any) {
       res.status(400).send(err.message)
@@ -175,8 +175,8 @@ export class BundlerServer {
         res.send({
           currency: 'ETH',
           // rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
-          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com' },
-          chain: 36864,
+          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'https://rpc.tenderly.co/fork/b7bee232-6e3a-4b60-9ed0-6cf92a3296ed' },
+          chain: 36865,
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,
             factoryAddress: forkConfig.factoryAddress,
@@ -205,7 +205,7 @@ export class BundlerServer {
         })
       }
       else {
-        throw "Only Hardhat Chain 36864 is supported"
+        throw "Only Hardhat Chain 36865 is supported"
       }
     } catch (err: any) {
       res.status(400).send(err.message)

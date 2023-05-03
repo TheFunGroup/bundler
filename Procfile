@@ -1,1 +1,1 @@
-web: ./localfork/setup.sh
+web: ./setup.sh

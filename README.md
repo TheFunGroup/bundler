@@ -14,7 +14,7 @@ cd localfork
 
 yarn install 
 
-npx hardhat node --fork "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com"
+npx hardhat node --fork "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776"
 ```
 
 ## Deploy bundler [in a separate terminam tab]

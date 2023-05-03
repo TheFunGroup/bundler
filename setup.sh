@@ -8,4 +8,4 @@ cd localfork && ./setup.sh
 cd .. && entryPointAddress=$(jq -r '.entryPointAddress' ./localfork/forkConfig.json)
 
 echo "Running bundler with entryPoint: ${entryPointAddress}"
-yarn run bundler --network "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com" --entryPoint "${entryPointAddress}" --unsafe 2>&1 | tee bundler.log &
+yarn run bundler --network "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776" --entryPoint "${entryPointAddress}" --unsafe 2>&1 | tee bundler.log &

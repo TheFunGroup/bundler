@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com",
+        url: "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776",
       }
     }
   }

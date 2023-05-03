@@ -37,7 +37,7 @@ const generateSha256 = (action) => {
 const generateBundlerCallScript = () => {
     const entryPointAddress = require(forkConfigPath).entryPointAddress
     // console.log(`yarn run bundler --network "http://127.0.0.1:8545" --entryPoint "${entryPointAddress}" --unsafe`)
-    console.log(`yarn run bundler --network "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com" --entryPoint "${entryPointAddress}" --unsafe`)
+    console.log(`yarn run bundler --network "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776" --entryPoint "${entryPointAddress}" --unsafe`)
 }
 
 // -d
@@ -50,35 +50,35 @@ const deployForFork = async () => {
 const loadNetwork = async (wallet) => {
     const entryPointAddress = await deployEntryPoint(wallet)
     console.log(`const entryPointAddress = "${entryPointAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const verificationAddress = await deployAuthContract(wallet)
     console.log(`const verificationAddr = "${verificationAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const factoryAddress = await deployFactory(wallet)
     console.log(`const factoryAddress = "${factoryAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const tokenSwapAddress = await deployApproveAndSwap(wallet)
     console.log(`const tokenSwapAddress = "${tokenSwapAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const tokenPriceOracleAddress = await deployPriceOracle(wallet)
     console.log(`const tokenPriceOracleAddress = "${tokenPriceOracleAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const approveAndExecAddress = await deployApproveAndExec(wallet)
     console.log(`const approveAndExecAddress = "${approveAndExecAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const gaslessPaymasterAddress = await deployGaslessPaymaster(wallet, entryPointAddress)
     console.log(`const gaslessPaymasterAddress = "${gaslessPaymasterAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const feePercentOracleAddress = await deployfeePercentOracle(wallet)
     console.log(`const feePercentOracleAddress = "${feePercentOracleAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const eoaAaveWithdrawAddress = await deployAaveWithdraw(wallet)
     console.log(`const eoaAaveWithdrawAddress = "${eoaAaveWithdrawAddress}"`)
@@ -117,7 +117,7 @@ const deployFullPaymaster = async () => {
 
     const paymasterAddress = await deployPaymaster(wallet, params)
     console.log(`const paymasterAddress = "${paymasterAddress}"`)
-    await timeout(1000)
+    // await timeout(10000)
 
     const olddata = require(forkConfigPath)
     fs.writeFileSync(forkConfigPath, JSON.stringify({ ...olddata, tokenPriceOracleAddress, paymasterAddress }))

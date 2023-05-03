@@ -29,3 +29,5 @@ yarn-error.log
 localfork/package-lock.json
 package-lock.json
 package-lock.json
+yarn.lock
+localfork/yarn.lock

@@ -1,4 +1,3 @@
-npm install yarn
 yarn install
 node ForkSetup.js -l
 node ForkSetup.js -d

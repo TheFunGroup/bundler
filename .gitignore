@@ -26,3 +26,6 @@ yarn-error.log
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+localfork/package-lock.json
+package-lock.json
+package-lock.json

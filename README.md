@@ -17,7 +17,7 @@ yarn install
 npx hardhat node --fork "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com"
 ```
 
-## Deploy bundler [in a separate terminam tab]
+## Deploy bundler [in a separate terminal tab]
 
 Starting point: `/bundler`
 ```

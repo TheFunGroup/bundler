@@ -14,3 +14,7 @@ signer 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 balance 9981.96499158700490132
 Bundle interval (seconds) 1
 connected to network { name: 'unknown', chainId: 36864 }
 running on http://localhost:3000/rpc
+error Command failed with signal "SIGTERM".
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

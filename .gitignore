@@ -31,3 +31,4 @@ package-lock.json
 package-lock.json
 yarn.lock
 localfork/yarn.lock
+*.log

@@ -117,7 +117,7 @@ const deployFullPaymaster = async () => {
 
     const paymasterAddress = await deployPaymaster(wallet, params)
     console.log(`const paymasterAddress = "${paymasterAddress}"`)
-    await timeout(10000)
+    await timeout(5000)
 
     const olddata = require(forkConfigPath)
     fs.writeFileSync(forkConfigPath, JSON.stringify({ ...olddata, tokenPriceOracleAddress, paymasterAddress }))

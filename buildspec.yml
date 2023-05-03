@@ -5,7 +5,6 @@ phases:
     runtime-versions:
       nodejs: 16
     commands:
-      - npm install
       - ./.platform/hooks/prebuild/yarn.sh
   pre_build:
     commands:
@@ -17,9 +16,6 @@ phases:
       - node ForkSetup.js -l
       - node ForkSetup.js -d
       - node ForkSetup.js -dp
-      - SCRIPT=$(node ForkSetup.js -b)
-      - echo $SCRIPT
-      - cd ..
 artifacts:
   files:
     - '**/*'

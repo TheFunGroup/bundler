@@ -1,8 +1,8 @@
 const hre = require("hardhat");
 const { ethers } = hre
 
-const HARDHAT_FORK_CHAIN_ID = 36864
-const HARDHAT_FORK_CHAIN_ID_STRING ="36864"
+const HARDHAT_FORK_CHAIN_ID = 33555
+const HARDHAT_FORK_CHAIN_ID_STRING ="33555"
 const HARDHAT_FORK_CHAIN_KEY = "ethereum-localfork"
 // const RPC_URL = "http://127.0.0.1:8545"
 const RPC_URL = "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com"

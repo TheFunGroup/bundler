@@ -6,6 +6,7 @@ phases:
       nodejs: 16
     commands:
       - npm install
+      - ./.platform/hooks/prebuild/yarn.sh
   pre_build:
     commands:
       - yarn && yarn preprocess

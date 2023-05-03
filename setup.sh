@@ -1,4 +1,3 @@
-npm install
-npm install yarn@1.22.19
+./.platform/hooks/prebuild/yarn.sh
 yarn && yarn preprocess
 ./localfork/setup.sh

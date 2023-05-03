@@ -19,16 +19,6 @@ phases:
       - SCRIPT=$(node ForkSetup.js -b)
       - echo $SCRIPT
       - cd ..
-      - eval $SCRIPT
-  post_build:
-    commands:
-      - echo "Moving to parent directory"
-      - cd ..
-
-  deploy:
-    commands:
-      - echo "Deploying"
-      - eval $SCRIPT
 artifacts:
   files:
     - '**/*'

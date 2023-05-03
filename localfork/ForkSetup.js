@@ -37,7 +37,7 @@ const generateSha256 = (action) => {
 const generateBundlerCallScript = () => {
     const entryPointAddress = require(forkConfigPath).entryPointAddress
     // console.log(`yarn run bundler --network "http://127.0.0.1:8545" --entryPoint "${entryPointAddress}" --unsafe`)
-    console.log(`yarn run bundler --network "https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776" --entryPoint "${entryPointAddress}" --unsafe`)
+    console.log(`yarn run bundler --network "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com" --entryPoint "${entryPointAddress}" --unsafe`)
 }
 
 // -d

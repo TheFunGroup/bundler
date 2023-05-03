@@ -42,16 +42,16 @@ success Already up-to-date.
 Done in 0.10s.
 Running bundler with entryPoint: 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13
 yarn run v1.22.19
-$ yarn --cwd packages/bundler bundler --network https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776 --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
-$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776 --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
+$ yarn --cwd packages/bundler bundler --network http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
+$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
 command-line arguments:  {
   config: './localconfig/bundler.config.json',
   auto: false,
-  network: 'https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776',
+  network: 'http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com',
   entryPoint: '0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13',
   unsafe: true
 }
-Merged configuration: {"port":"3000","entryPoint":"0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
+Merged configuration: {"port":"3000","entryPoint":"0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
 FATAL: entrypoint not deployed at 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

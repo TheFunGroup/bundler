@@ -175,7 +175,7 @@ export class BundlerServer {
         res.send({
           currency: 'ETH',
           // rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
-          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com' },
+          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'https://rpc.tenderly.co/fork/db38d879-8617-4b0c-b142-ba40b41dc776' },
           chain: 36864,
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,

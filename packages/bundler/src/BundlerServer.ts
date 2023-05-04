@@ -158,7 +158,7 @@ export class BundlerServer {
         }
       }
       else {
-        throw "Only Hardhat Chain 31337 is supported"
+        throw "Only Hardhat Chain 36865 is supported"
       }
     } catch (err: any) {
       res.status(400).send(err.message)
@@ -174,8 +174,9 @@ export class BundlerServer {
       if (chain === HARDHAT_FORK_CHAIN_ID_STRING || chain == HARDHAT_FORK_CHAIN_KEY) {
         res.send({
           currency: 'ETH',
-          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
-          chain: 31337,
+          // rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
+          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1' },
+          chain: 36865,
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,
             factoryAddress: forkConfig.factoryAddress,
@@ -204,7 +205,7 @@ export class BundlerServer {
         })
       }
       else {
-        throw "Only Hardhat Chain 31337 is supported"
+        throw "Only Hardhat Chain 36865 is supported"
       }
     } catch (err: any) {
       res.status(400).send(err.message)

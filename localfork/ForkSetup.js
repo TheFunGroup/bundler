@@ -37,7 +37,6 @@ const generateSha256 = (action) => {
 const generateBundlerCallScript = () => {
     const entryPointAddress = require(forkConfigPath).entryPointAddress
     console.log(`yarn run bundler --network ${RPC_URL} --entryPoint "${entryPointAddress}" --unsafe`)
-
 }
 
 // -d
@@ -50,35 +49,35 @@ const deployForFork = async () => {
 const loadNetwork = async (wallet) => {
     const entryPointAddress = await deployEntryPoint(wallet)
     console.log(`const entryPointAddress = "${entryPointAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const verificationAddress = await deployAuthContract(wallet)
     console.log(`const verificationAddr = "${verificationAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const factoryAddress = await deployFactory(wallet)
     console.log(`const factoryAddress = "${factoryAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const tokenSwapAddress = await deployApproveAndSwap(wallet)
     console.log(`const tokenSwapAddress = "${tokenSwapAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const tokenPriceOracleAddress = await deployPriceOracle(wallet)
     console.log(`const tokenPriceOracleAddress = "${tokenPriceOracleAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const approveAndExecAddress = await deployApproveAndExec(wallet)
     console.log(`const approveAndExecAddress = "${approveAndExecAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const gaslessPaymasterAddress = await deployGaslessPaymaster(wallet, entryPointAddress)
     console.log(`const gaslessPaymasterAddress = "${gaslessPaymasterAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const feePercentOracleAddress = await deployfeePercentOracle(wallet)
     console.log(`const feePercentOracleAddress = "${feePercentOracleAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const eoaAaveWithdrawAddress = await deployAaveWithdraw(wallet)
     console.log(`const eoaAaveWithdrawAddress = "${eoaAaveWithdrawAddress}"`)
@@ -117,7 +116,7 @@ const deployFullPaymaster = async () => {
 
     const paymasterAddress = await deployPaymaster(wallet, params)
     console.log(`const paymasterAddress = "${paymasterAddress}"`)
-    await timeout(1000)
+    await timeout(5000)
 
     const olddata = require(forkConfigPath)
     const forkConfig = { ...olddata, tokenPriceOracleAddress, paymasterAddress }
@@ -132,44 +131,44 @@ const deploy = async (signer, obj, params = []) => {
     return contract.address
 }
 
-const deployEntryPoint = (signer) => {
-    return deploy(signer, entryPoint)
+const deployEntryPoint = async (signer) => {
+    return await deploy(signer, entryPoint)
 }
 
-const deployAuthContract = (signer) => {
-    return deploy(signer, authContract)
+const deployAuthContract = async (signer) => {
+    return await deploy(signer, authContract)
 }
 
-const deployAaveWithdraw = (signer) => {
-    return deploy(signer, aaveWithdraw)
+const deployAaveWithdraw = async (signer) => {
+    return await deploy(signer, aaveWithdraw)
 }
 
-const deployApproveAndSwap = (signer) => {
-    return deploy(signer, approveAndSwap, [WETH_MAINNET])
+const deployApproveAndSwap = async (signer) => {
+    return await deploy(signer, approveAndSwap, [WETH_MAINNET])
 }
 
-const deployFactory = (signer) => {
-    return deploy(signer, factory)
+const deployFactory = async (signer) => {
+    return await deploy(signer, factory)
 }
 
-const deployPaymaster = (signer, params) => {
-    return deploy(signer, paymasterdata, params)
+const deployPaymaster = async (signer, params) => {
+    return await deploy(signer, paymasterdata, params)
 }
 
-const deployPriceOracle = (signer) => {
-    return deploy(signer, priceOracle)
+const deployPriceOracle = async (signer) => {
+    return await deploy(signer, priceOracle)
 }
 
-const deployApproveAndExec = (signer) => {
-    return deploy(signer, approveAndExec)
+const deployApproveAndExec = async (signer) => {
+    return await deploy(signer, approveAndExec)
 }
 
-const deployGaslessPaymaster = (signer, params) => {
-    return deploy(signer, gaslessPaymaster, [params])
+const deployGaslessPaymaster = async (signer, params) => {
+    return await deploy(signer, gaslessPaymaster, [params])
 }
 
-const deployfeePercentOracle = (signer) => {
-    return deploy(signer, feePercentOracle)
+const deployfeePercentOracle = async (signer) => {
+    return await deploy(signer, feePercentOracle)
 }
 
 // -da

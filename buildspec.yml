@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - ./.platform/hooks/prebuild/yarn.sh
+  pre_build:
+    commands:
+      - yarn && yarn preprocess
+  build:
+    commands:
+      - cd localfork
+      - yarn install
+      - node ForkSetup.js -l
+      - node ForkSetup.js -d
+      - node ForkSetup.js -dp
+artifacts:
+  files:
+    - '**/*'
+    - 'node_modules/**/*'
+    - 'package-lock.json'
+    - 'tsconfig.packages.json'
+    - 'yarn.lock'
+    - 'package.json'
+    - 'localfork/abis/**/*'
+    - 'localfork/node_modules/**/*'
+    - 'localfork/forkConfig.json'
+    - 'localfork/package.json'
+    - 'localfork/yarn.lock'

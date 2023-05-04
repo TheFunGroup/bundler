@@ -1,7 +1,7 @@
-node ForkSetup.js -l
+yarn install
+# node ForkSetup.js -l
 node ForkSetup.js -d
-node ForkSetup.js -dp
-SCRIPT=`node ForkSetup.js -b`
-echo $SCRIPT
-cd ..
-eval $SCRIPT
+# node ForkSetup.js -dp
+# SCRIPT=`node ForkSetup.js -b`
+# echo $SCRIPT
+# cd .. && eval $SCRIPT

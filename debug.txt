@@ -1,0 +1,59 @@
+
+## Installing the NodeSource Node.js 16.x repo...
+
+
+## Inspecting system...
+
+
+## You don't appear to be running an Enterprise Linux based system,
+please contact NodeSource at https://github.com/nodesource/distributions/issues
+if you think this is incorrect or would like your distribution to be considered
+for support.
+
+yarn install v1.22.19
+[1/5] Validating package.json...
+[2/5] Resolving packages...
+success Already up-to-date.
+Done in 0.21s.
+yarn run v1.22.19
+$ yarn lerna-clear && yarn hardhat-compile && yarn lerna-tsc
+$ lerna run clear
+$ rm -rf dist artifacts cache src/types
+$ rm -rf dist artifacts cache
+$ rm -rf dist artifacts cache src/types
+$ lerna run hardhat-compile
+$ hardhat compile
+Generating typings for: 20 artifacts in dir: src/types for target: ethers-v5
+Successfully generated 62 typings!
+Compiled 21 Solidity files successfully
+$ hardhat compile
+Generating typings for: 40 artifacts in dir: src/types for target: ethers-v5
+Successfully generated 114 typings!
+Compiled 35 Solidity files successfully
+$ lerna run tsc --scope @account-abstraction/*
+$ tsc
+$ tsc
+$ tsc
+Done in 13.79s.
+yarn install v1.22.19
+[1/5] Validating package.json...
+[2/5] Resolving packages...
+success Already up-to-date.
+Done in 0.10s.
+Running bundler with entryPoint: 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13
+yarn run v1.22.19
+$ yarn --cwd packages/bundler bundler --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
+$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13 --unsafe
+command-line arguments:  {
+  config: './localconfig/bundler.config.json',
+  auto: false,
+  network: 'https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1',
+  entryPoint: '0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13',
+  unsafe: true
+}
+Merged configuration: {"port":"3000","entryPoint":"0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
+FATAL: entrypoint not deployed at 0x5fF6d1292F8CB1e57DD9918DAD1df18d0d42dD13
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

@@ -14,7 +14,7 @@ cd localfork
 
 yarn install 
 
-npx hardhat node --fork "http://bundler-eb-dev.us-west-2.elasticbeanstalk.com"
+npx hardhat node --fork "https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5"
 ```
 
 ## Deploy bundler [in a separate terminal tab]

@@ -175,7 +175,7 @@ export class BundlerServer {
         res.send({
           currency: 'ETH',
           // rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'http://127.0.0.1:8545' },
-          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5' },
+          rpcdata: { bundlerUrl: `${LOCALHOST_URL}rpc`, rpcUrl: 'https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1' },
           chain: 36865,
           aaData: {
             entryPointAddress: forkConfig.entryPointAddress,

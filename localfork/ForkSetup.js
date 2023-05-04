@@ -36,8 +36,7 @@ const generateSha256 = (action) => {
 // -b
 const generateBundlerCallScript = () => {
     const entryPointAddress = require(forkConfigPath).entryPointAddress
-    // console.log(`yarn run bundler --network "http://127.0.0.1:8545" --entryPoint "${entryPointAddress}" --unsafe`)
-    console.log(`yarn run bundler --network "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com" --entryPoint "${entryPointAddress}" --unsafe`)
+    console.log(`yarn run bundler --network ${RPC_URL} --entryPoint "${entryPointAddress}" --unsafe`)
 }
 
 // -d
@@ -120,7 +119,9 @@ const deployFullPaymaster = async () => {
     await timeout(5000)
 
     const olddata = require(forkConfigPath)
-    fs.writeFileSync(forkConfigPath, JSON.stringify({ ...olddata, tokenPriceOracleAddress, paymasterAddress }))
+    const forkConfig = { ...olddata, tokenPriceOracleAddress, paymasterAddress }
+
+    fs.writeFileSync(forkConfigPath, JSON.stringify(forkConfig))
 }
 
 

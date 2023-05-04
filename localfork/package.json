@@ -15,6 +15,7 @@
     "@fun-wallet/sdk": "^0.1.0",
     "@nomiclabs/hardhat-waffle": "^2.0.5",
     "crypto-js": "^4.1.1",
-    "ethers": "^5.7.2"
+    "ethers": "^6.0.5",
+    "aws-sdk": "^2.1353.0"
   }
 }

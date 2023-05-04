@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: "http://bundler-eb-dev.us-west-2.elasticbeanstalk.com",
+        url: "https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5",
       }
     }
   }

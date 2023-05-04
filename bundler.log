@@ -1,15 +1,15 @@
 yarn run v1.22.19
-$ yarn --cwd packages/bundler bundler --network http://bundler-eb-dev.us-west-2.elasticbeanstalk.com --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
-$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network http://bundler-eb-dev.us-west-2.elasticbeanstalk.com --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
+$ yarn --cwd packages/bundler bundler --network https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5 --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
+$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5 --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
 command-line arguments:  {
   config: './localconfig/bundler.config.json',
   auto: false,
-  network: 'http://bundler-eb-dev.us-west-2.elasticbeanstalk.com',
+  network: 'https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5',
   entryPoint: '0xD6a63F1f208363F2BF40021a0083651aaD206D3a',
   port: '3000',
   unsafe: true
 }
-Merged configuration: {"port":"3000","entryPoint":"0xD6a63F1f208363F2BF40021a0083651aaD206D3a","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"http://bundler-eb-dev.us-west-2.elasticbeanstalk.com","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
+Merged configuration: {"port":"3000","entryPoint":"0xD6a63F1f208363F2BF40021a0083651aaD206D3a","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
 signer 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 balance 9981.964991587004901321
 Bundle interval (seconds) 1
 connected to network { name: 'unknown', chainId: 36865 }

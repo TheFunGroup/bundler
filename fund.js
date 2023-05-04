@@ -3,7 +3,7 @@ const WALLETS = [
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
 ];
 const main = async () => {
-    const provider = new ethers.providers.JsonRpcProvider('http://bundler-eb-dev.us-west-2.elasticbeanstalk.com')
+    const provider = new ethers.providers.JsonRpcProvider('https://rpc.tenderly.co/fork/be980598-12cd-4605-ab66-ec2bbe0986c5')
     const result = await provider.send("tenderly_setBalance", [
         WALLETS,
         //amount in wei will be set for all wallets

@@ -8,17 +8,6 @@ Starting point: `/bundler`
 yarn && yarn preprocess
 ```
 
-## Start hardhat fork
-```
-cd localfork
-
-yarn install 
-
-npx hardhat node --fork "https://eth-mainnet.g.alchemy.com/v2/lcA7Kyqv42J1Qh-wLm__DdqSCJBtZyd1"
-```
-
-## Deploy bundler [in a separate terminam tab]
-
 Starting point: `/bundler`
 ```
 cd localfork 

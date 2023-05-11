@@ -1,20 +1,17 @@
 yarn run v1.22.19
-$ yarn --cwd packages/bundler bundler --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
-$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0xD6a63F1f208363F2BF40021a0083651aaD206D3a --port 3000 --unsafe
+$ yarn --cwd packages/bundler bundler --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0x82EdA215Fa92B45a3a76837C65Ab862b6C7564a8 --port 3000 --unsafe
+$ ts-node ./src/exec.ts --config ./localconfig/bundler.config.json --network https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1 --entryPoint 0x82EdA215Fa92B45a3a76837C65Ab862b6C7564a8 --port 3000 --unsafe
 command-line arguments:  {
   config: './localconfig/bundler.config.json',
   auto: false,
   network: 'https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1',
-  entryPoint: '0xD6a63F1f208363F2BF40021a0083651aaD206D3a',
+  entryPoint: '0x82EdA215Fa92B45a3a76837C65Ab862b6C7564a8',
   port: '3000',
   unsafe: true
 }
-Merged configuration: {"port":"3000","entryPoint":"0xD6a63F1f208363F2BF40021a0083651aaD206D3a","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
-signer 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 balance 9981.964991587004901321
-Bundle interval (seconds) 1
-connected to network { name: 'unknown', chainId: 36865 }
-running on http://localhost:3000/rpc
-error Command failed with signal "SIGTERM".
+Merged configuration: {"port":"3000","entryPoint":"0x82EdA215Fa92B45a3a76837C65Ab862b6C7564a8","unsafe":true,"conditionalRpc":false,"gasFactor":"1","network":"https://rpc.tenderly.co/fork/613ac0a0-390b-4805-99ab-6f16d528d9b1","beneficiary":"0x9d93062e692E51884fEbfCE8Fa49e323563c7218","minBalance":"1","mnemonic":"./localconfig/mnemonic.txt","maxBundleGas":5000000,"minStake":"1","minUnstakeDelay":0,"autoBundleInterval":1,"autoBundleMempoolSize":10}
+FATAL: Invalid entryPoint contract at 0x82EdA215Fa92B45a3a76837C65Ab862b6C7564a8. wrong version?
+error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

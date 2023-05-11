@@ -17,5 +17,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "sourceMap": true
-  }
+  },
+  "include": [
+    "localfork/abis/**/*.json"
+  ]
 }

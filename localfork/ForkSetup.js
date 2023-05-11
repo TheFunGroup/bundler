@@ -6,19 +6,13 @@ const { FunWallet, FunWalletConfig } = require('@fun-wallet/sdk')
 const { TokenSwap, TokenTransfer } = require("@fun-wallet/sdk").Modules
 const CryptoJS = require("crypto-js")
 
-const { HARDHAT_FORK_CHAIN_ID, API_KEY, RPC_URL, PRIV_KEY, PKEY, AVAX_RPC_URL, USDC_ADDR, CHAINLINK_TOKEN_AGGREGATOR_ADDRESS, logUserPaymasterBalance, timeout, transferAmt } = require("./ForkUtils")
+const { 
+    HARDHAT_FORK_CHAIN_ID, API_KEY, RPC_URL, PRIV_KEY, PKEY, AVAX_RPC_URL, USDC_ADDR, CHAINLINK_TOKEN_AGGREGATOR_ADDRESS, 
+    logUserPaymasterBalance, timeout, transferAmt, getContractData, updateContractAddress
+} = require("./ForkUtils")
 
 const ERC20 = require("./abis/ERC20.json")
-const entryPoint = require("./abis/EntryPoint.json")
-const authContract = require("./abis/UserAuthentication.json")
-const aaveWithdraw = require("./abis/AaveWithdraw.json")
-const approveAndSwap = require("./abis/ApproveAndSwap.json")
-const factory = require("./abis/FunWalletFactory.json")
 const paymasterdata = require("./abis/TokenPaymaster.json")
-const priceOracle = require("./abis/TokenPriceOracle.json")
-const approveAndExec = require("./abis/ApproveAndExec.json")
-const gaslessPaymaster = require("./abis/GaslessPaymaster.json")
-const feePercentOracle = require("./abis/FeePercentOracle.json")
 
 const ROUTER_ADDR = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
 const WETH_MAINNET = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
@@ -124,52 +118,55 @@ const deployFullPaymaster = async () => {
     fs.writeFileSync(forkConfigPath, JSON.stringify(forkConfig))
 }
 
-
-const deploy = async (signer, obj, params = []) => {
-    const factory = new ContractFactory(obj.abi, obj.bytecode, signer);
+const deploy = async (signer, name, params = []) => {
+    const { abi, bytecode } = await getContractData(name);
+    const factory = new ContractFactory(abi, bytecode, signer);
     const contract = await factory.deploy(...params);
-    return contract.address
-}
+    return contract.address;
+};
 
 const deployEntryPoint = async (signer) => {
-    return await deploy(signer, entryPoint)
-}
+    const contractName = 'EntryPoint';
+    const address = await deploy(signer, contractName);
+    await updateContractAddress(contractName, address);
+    return address
+};
 
 const deployAuthContract = async (signer) => {
-    return await deploy(signer, authContract)
-}
+    return await deploy(signer, 'UserAuthentication');
+};
 
 const deployAaveWithdraw = async (signer) => {
-    return await deploy(signer, aaveWithdraw)
-}
+    return await deploy(signer, 'AaveWithdraw');
+};
 
 const deployApproveAndSwap = async (signer) => {
-    return await deploy(signer, approveAndSwap, [WETH_MAINNET])
-}
+    return await deploy(signer, 'ApproveAndSwap', [WETH_MAINNET]);
+};
 
 const deployFactory = async (signer) => {
-    return await deploy(signer, factory)
-}
+    return await deploy(signer, 'FunWalletFactory');
+};
 
 const deployPaymaster = async (signer, params) => {
-    return await deploy(signer, paymasterdata, params)
-}
+    return await deploy(signer, 'TokenPaymaster', params);
+};
 
 const deployPriceOracle = async (signer) => {
-    return await deploy(signer, priceOracle)
-}
+    return await deploy(signer, 'TokenPriceOracle');
+};
 
 const deployApproveAndExec = async (signer) => {
-    return await deploy(signer, approveAndExec)
-}
+    return await deploy(signer, 'ApproveAndExec');
+};
 
 const deployGaslessPaymaster = async (signer, params) => {
-    return await deploy(signer, gaslessPaymaster, [params])
-}
+    return await deploy(signer, 'GaslessPaymaster', [params]);
+};
 
 const deployfeePercentOracle = async (signer) => {
-    return await deploy(signer, feePercentOracle)
-}
+    return await deploy(signer, 'FeePercentOracle');
+};
 
 // -da
 const deployForAvax = async () => {
@@ -242,8 +239,9 @@ const walletTransferERC = async (wallet, to, amount, tokenAddr) => {
     console.log("End Wallet ERC Amount: ", end)
 }
 
-const loadPaymaster = (address, provider) => {
-    return new ethers.Contract(address, paymasterdata.abi, provider)
+const loadPaymaster = async (address, provider) => {
+    const { abi } = await getContractData("TokenPaymaster");
+    return new ethers.Contract(address, abi, provider)
 }
 
 const execContractFunc = async (eoa, data) => {
@@ -276,19 +274,10 @@ const fundPaymasterEth = async (eoa, paymasterAddr, value) => {
 
 // -l
 const loadAbis = () => {
-    const entryPointPath = "eip-4337/EntryPoint.sol/EntryPoint.json"
-    const authContractPath = "validations/UserAuthentication.sol/UserAuthentication.json"
-    const approveAndSwapPath = "modules/actions/ApproveAndSwap.sol/ApproveAndSwap.json"
-    const aaveWithdrawPath = "modules/actions/AaveWithdraw.sol/AaveWithdraw.json"
-    const factoryPath = "deployer/FunWalletFactory.sol/FunWalletFactory.json"
     const walletPath = "FunWallet.sol/FunWallet.json"
     const tokenPaymasterpath = "paymaster/TokenPaymaster.sol/TokenPaymaster.json"
-    const gaslessPaymasterpath = "paymaster/GaslessPaymaster.sol/GaslessPaymaster.json"
-    const tokenOracle = "oracles/TokenPriceOracle.sol/TokenPriceOracle.json"
-    const feePercentOracle = "oracles/FeePercentOracle.sol/FeePercentOracle.json"
     const module = "modules/Module.sol/Module.json"
-    const approveAndExec = "modules/actions/ApproveAndExec.sol/ApproveAndExec.json"
-    const abis = [entryPointPath, authContractPath, approveAndSwapPath, factoryPath, walletPath, tokenPaymasterpath, gaslessPaymasterpath, tokenOracle, aaveWithdrawPath, feePercentOracle, module, approveAndExec]
+    const abis = [walletPath, tokenPaymasterpath, module]
 
     abis.forEach(moveFile)
 }

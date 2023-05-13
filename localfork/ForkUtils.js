@@ -1,10 +1,10 @@
+const axios = require('axios');
 const hre = require("hardhat");
 const { ethers } = hre
 
 const HARDHAT_FORK_CHAIN_ID = 36864
 const HARDHAT_FORK_CHAIN_ID_STRING ="36864"
 const HARDHAT_FORK_CHAIN_KEY = "ethereum-localfork"
-// const RPC_URL = "http://127.0.0.1:8545"
 const RPC_URL = "http://fun-alchemy-fork-eb-2-dev.us-west-2.elasticbeanstalk.com"
 const PRIV_KEY = "0x66f37ee92a08eebb5da72886f3c1280d5d1bd5eb8039f52fdb8062df7e364206"
 const PKEY = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
@@ -17,6 +17,10 @@ const USDC_AVAX_ADDR = "0x5425890298aed601595a70AB815c96711a31Bc65"
 const AVAX_RECEIVE_PKEY = '3ef076e7d3d2e1f65ded46b02372d7c5300aec49e780b3bb4418820bf068e732'
 const CHAINLINK_TOKEN_AGGREGATOR_ADDRESS = "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419"
 const LOCALHOST_URL = "http://127.0.0.1:3000/"
+
+const FUN_API_SERVER_URL = 'https://dffw93t17k.execute-api.us-west-2.amazonaws.com/prod'
+const FUN_API_KEY = 'f34XaaOQMJ93yNvlC7EZu7OGIJCQ3WFQ2pJT4OJE';
+
 const createErc = (addr, provider) => {
     return new ethers.Contract(addr, ERC20.abi, provider)
 }
@@ -75,8 +79,42 @@ const loadPaymaster = (address, provider) => {
     return new ethers.Contract(address, paymasterdata.abi, provider)
 }
 
+const getContractData = async (name) => {
+    try {
+        const response = await axios.get(`${FUN_API_SERVER_URL}/contract/${name}`,{
+            headers: {
+                'X-Api-Key': FUN_API_KEY // replace with your actual API key
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+async function updateContractAddress(contractName, address) {
+    const data = {
+      name: contractName,
+      addresses: {
+        [HARDHAT_FORK_CHAIN_ID]: address // 'addresses' is a dictionary with chainIds as keys and addresses as values
+      }
+    };
+  
+    try {
+      const response = await axios.post(`${FUN_API_SERVER_URL}/contract/update`, data, {
+          headers: {
+              'X-Api-Key': FUN_API_KEY
+          }
+      });    
+      return response.data;
+    } catch (error) {
+      console.error(`Error updating address for ${contractName}: ${error}`);
+      throw error;
+    }
+}  
 
 module.exports = {
     transferAmt, getAddrBalanceErc, timeout, getBalance, execContractFunc, loadPaymaster, logUserPaymasterBalance,
-    getUserBalanceErc, createErc, logPairing, HARDHAT_FORK_CHAIN_ID_STRING, CHAINLINK_TOKEN_AGGREGATOR_ADDRESS, HARDHAT_FORK_CHAIN_ID, HARDHAT_FORK_CHAIN_KEY, RPC_URL, PRIV_KEY, PKEY, DAI_ADDR, API_KEY, USDC_ADDR, AVAX_CHAIN_ID, AVAX_RPC_URL, USDC_AVAX_ADDR, LOCALHOST_URL, AVAX_RECEIVE_PKEY
+    getUserBalanceErc, createErc, logPairing, getContractData,updateContractAddress,
+    HARDHAT_FORK_CHAIN_ID_STRING, CHAINLINK_TOKEN_AGGREGATOR_ADDRESS, HARDHAT_FORK_CHAIN_ID, HARDHAT_FORK_CHAIN_KEY, RPC_URL, PRIV_KEY, PKEY, DAI_ADDR, API_KEY, USDC_ADDR, AVAX_CHAIN_ID, AVAX_RPC_URL, USDC_AVAX_ADDR, LOCALHOST_URL, AVAX_RECEIVE_PKEY
 }

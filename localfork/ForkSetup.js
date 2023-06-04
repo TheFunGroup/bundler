@@ -49,39 +49,39 @@ const loadNetwork = async (wallet) => {
     console.log(`const entryPointAddress = "${entryPointAddress}"`)
     await timeout(1000)
 
-    const verificationAddress = await deployAuthContract(wallet)
-    console.log(`const verificationAddr = "${verificationAddress}"`)
-    await timeout(1000)
+    // const verificationAddress = await deployAuthContract(wallet)
+    // console.log(`const verificationAddr = "${verificationAddress}"`)
+    // await timeout(1000)
 
-    const factoryAddress = await deployFactory(wallet)
-    console.log(`const factoryAddress = "${factoryAddress}"`)
-    await timeout(1000)
+    // const factoryAddress = await deployFactory(wallet)
+    // console.log(`const factoryAddress = "${factoryAddress}"`)
+    // await timeout(1000)
 
-    const tokenSwapAddress = await deployApproveAndSwap(wallet)
-    console.log(`const tokenSwapAddress = "${tokenSwapAddress}"`)
-    await timeout(1000)
+    // const tokenSwapAddress = await deployApproveAndSwap(wallet)
+    // console.log(`const tokenSwapAddress = "${tokenSwapAddress}"`)
+    // await timeout(1000)
 
-    const tokenPriceOracleAddress = await deployPriceOracle(wallet)
-    console.log(`const tokenPriceOracleAddress = "${tokenPriceOracleAddress}"`)
-    await timeout(1000)
+    // const tokenPriceOracleAddress = await deployPriceOracle(wallet)
+    // console.log(`const tokenPriceOracleAddress = "${tokenPriceOracleAddress}"`)
+    // await timeout(1000)
 
-    const eoaAaveWithdrawAddress = await deployAaveWithdraw(wallet)
-    console.log(`const eoaAaveWithdrawAddress = "${eoaAaveWithdrawAddress}"`)
+    // const eoaAaveWithdrawAddress = await deployAaveWithdraw(wallet)
+    // console.log(`const eoaAaveWithdrawAddress = "${eoaAaveWithdrawAddress}"`)
 
-    const poolFactoryAddress = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
-    const quoterContractAddress = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
-    const uniswapV3RouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+    // const poolFactoryAddress = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+    // const quoterContractAddress = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
+    // const uniswapV3RouterAddress = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
 
     const config = {
         entryPointAddress,
-        verificationAddress,
-        factoryAddress,
-        tokenSwapAddress,
-        poolFactoryAddress,
-        quoterContractAddress,
-        uniswapV3RouterAddress,
-        tokenPriceOracleAddress,
-        eoaAaveWithdrawAddress
+        //     verificationAddress,
+        //     factoryAddress,
+        //     tokenSwapAddress,
+        //     poolFactoryAddress,
+        //     quoterContractAddress,
+        //     uniswapV3RouterAddress,
+        //     tokenPriceOracleAddress,
+        //     eoaAaveWithdrawAddress
     }
     fs.writeFileSync(forkConfigPath, JSON.stringify(config))
 }

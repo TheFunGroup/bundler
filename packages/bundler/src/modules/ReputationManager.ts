@@ -194,15 +194,5 @@ export class ReputationManager {
     if (info?.addr == null || this.isWhitelisted(info.addr)) {
       return
     }
-    requireCond(this.getStatus(info.addr) !== ReputationStatus.BANNED,
-      `${title} ${info.addr} is banned`,
-      ValidationErrors.Reputation, { [title]: info.addr })
-
-    requireCond(BigNumber.from(info.stake).gte(this.minStake),
-      `${title} ${info.addr} stake ${tostr(info.stake)} is too low (min=${tostr(this.minStake)})`,
-      ValidationErrors.InsufficientStake)
-    requireCond(BigNumber.from(info.unstakeDelaySec).gte(this.minUnstakeDelay),
-      `${title} ${info.addr} unstake delay ${tostr(info.unstakeDelaySec)} is too low (min=${tostr(this.minUnstakeDelay)})`,
-      ValidationErrors.InsufficientStake)
   }
 }

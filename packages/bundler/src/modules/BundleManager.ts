@@ -24,7 +24,7 @@ export class BundleManager {
   signer: JsonRpcSigner
   mutex = new Mutex()
 
-  constructor (
+  constructor(
     readonly entryPoint: EntryPoint,
     readonly eventsManager: EventsManager,
     readonly mempoolManager: MempoolManager,
@@ -47,7 +47,7 @@ export class BundleManager {
    * collect UserOps from mempool into a bundle
    * send this bundle.
    */
-  async sendNextBundle (): Promise<SendBundleReturn | undefined> {
+  async sendNextBundle(): Promise<SendBundleReturn | undefined> {
     return await this.mutex.runExclusive(async () => {
       debug('sendNextBundle')
 
@@ -55,6 +55,7 @@ export class BundleManager {
       await this.handlePastEvents()
 
       const [bundle, storageMap] = await this.createBundle()
+
       if (bundle.length === 0) {
         debug('sendNextBundle - no bundle to send')
       } else {
@@ -66,7 +67,7 @@ export class BundleManager {
     })
   }
 
-  async handlePastEvents (): Promise<void> {
+  async handlePastEvents(): Promise<void> {
     await this.eventsManager.handlePastEvents()
   }
 
@@ -75,7 +76,8 @@ export class BundleManager {
    * after submitting the bundle, remove all UserOps from the mempool
    * @return SendBundleReturn the transaction and UserOp hashes on successful transaction, or null on failed transaction
    */
-  async sendBundle (userOps: UserOperation[], beneficiary: string, storageMap: StorageMap): Promise<SendBundleReturn | undefined> {
+  async sendBundle(userOps: UserOperation[], beneficiary: string, storageMap: StorageMap): Promise<SendBundleReturn | undefined> {
+    console.log(userOps)
     try {
       const feeData = await this.provider.getFeeData()
       const tx = await this.entryPoint.populateTransaction.handleOps(userOps, beneficiary, {
@@ -104,14 +106,17 @@ export class BundleManager {
       debug('sent handleOps with', userOps.length, 'ops. removing from mempool')
       // hashes are needed for debug rpc only.
       const hashes = await this.getUserOpHashes(userOps)
+      console.log("TX ID: ", ret)
       return {
         transactionHash: ret,
         userOpHashes: hashes
       }
     } catch (e: any) {
       let parsedError: ErrorDescription
+
+
       try {
-        parsedError = this.entryPoint.interface.parseError((e.data?.data ?? e.data))
+        parsedError = this.entryPoint.interface.parseError((e.error.data?.data ?? e.error.data))
       } catch (e1) {
         this.checkFatal(e)
         console.warn('Failed handleOps, but non-FailedOp error', e)
@@ -137,14 +142,14 @@ export class BundleManager {
   }
 
   // fatal errors we know we can't recover
-  checkFatal (e: any): void {
+  checkFatal(e: any): void {
     // console.log('ex entries=',Object.entries(e))
     if (e.error?.code === -32601) {
       throw e
     }
   }
 
-  async createBundle (): Promise<[UserOperation[], StorageMap]> {
+  async createBundle(): Promise<[UserOperation[], StorageMap]> {
     const entries = this.mempoolManager.getSortedForInclusion()
     const bundle: UserOperation[] = []
 
@@ -168,15 +173,15 @@ export class BundleManager {
         continue
       }
       if (paymaster != null && (paymasterStatus === ReputationStatus.THROTTLED ?? (stakedEntityCount[paymaster] ?? 0) > 1)) {
-        debug('skipping throttled paymaster', entry.userOp.sender, entry.userOp.nonce)
+        console.log('skipping throttled paymaster', entry.userOp.sender, entry.userOp.nonce)
         continue
       }
       if (factory != null && (deployerStatus === ReputationStatus.THROTTLED ?? (stakedEntityCount[factory] ?? 0) > 1)) {
-        debug('skipping throttled factory', entry.userOp.sender, entry.userOp.nonce)
+        console.log('skipping throttled factory', entry.userOp.sender, entry.userOp.nonce)
         continue
       }
       if (senders.has(entry.userOp.sender)) {
-        debug('skipping already included sender', entry.userOp.sender, entry.userOp.nonce)
+        console.log('skipping already included sender', entry.userOp.sender, entry.userOp.nonce)
         // allow only a single UserOp per sender per bundle
         continue
       }
@@ -185,7 +190,7 @@ export class BundleManager {
         // re-validate UserOp. no need to check stake, since it cannot be reduced between first and 2nd validation
         validationResult = await this.validationManager.validateUserOp(entry.userOp, entry.referencedContracts, false)
       } catch (e: any) {
-        debug('failed 2nd validation:', e.message)
+        console.log('failed 2nd validation:', e.message)
         // failed validation. don't try anymore
         this.mempoolManager.removeUserOp(entry.userOp)
         continue
@@ -195,9 +200,11 @@ export class BundleManager {
       // which means we could "cram" more UserOps into a bundle.
       const userOpGasCost = BigNumber.from(validationResult.returnInfo.preOpGas).add(entry.userOp.callGasLimit)
       const newTotalGas = totalGas.add(userOpGasCost)
-      if (newTotalGas.gt(this.maxBundleGas)) {
-        break
-      }
+
+
+    
+
+
 
       if (paymaster != null) {
         if (paymasterDeposit[paymaster] == null) {
@@ -216,15 +223,17 @@ export class BundleManager {
       }
 
       // If sender's account already exist: replace with its storage root hash
+      console.log("\n\npass3\n\n")
       if (this.mergeToAccountRootHash && this.conditionalRpc && entry.userOp.initCode.length <= 2) {
         const { storageHash } = await this.provider.send('eth_getProof', [entry.userOp.sender, [], 'latest'])
         storageMap[entry.userOp.sender.toLowerCase()] = storageHash
       }
+      console.log("\n\npass4\n\n")
+
       mergeStorageMap(storageMap, validationResult.storageMap)
 
       senders.add(entry.userOp.sender)
       bundle.push(entry.userOp)
-      totalGas = newTotalGas
     }
     return [bundle, storageMap]
   }
@@ -233,7 +242,7 @@ export class BundleManager {
    * determine who should receive the proceedings of the request.
    * if signer's balance is too low, send it to signer. otherwise, send to configured beneficiary.
    */
-  async _selectBeneficiary (): Promise<string> {
+  async _selectBeneficiary(): Promise<string> {
     const currentBalance = await this.provider.getBalance(this.signer.getAddress())
     let beneficiary = this.beneficiary
     // below min-balance redeem to the signer, to keep it active.
@@ -245,7 +254,7 @@ export class BundleManager {
   }
 
   // helper function to get hashes of all UserOps
-  async getUserOpHashes (userOps: UserOperation[]): Promise<string[]> {
+  async getUserOpHashes(userOps: UserOperation[]): Promise<string[]> {
     const { userOpHashes } = await runContractScript(this.entryPoint.provider,
       new GetUserOpHashes__factory(),
       [this.entryPoint.address, userOps])
